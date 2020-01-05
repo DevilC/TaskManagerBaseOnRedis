@@ -1,5 +1,7 @@
 package JobPackage;
 
+import resultPackage.JobResult;
+
 public interface Job {
     void start();
 
@@ -7,5 +9,5 @@ public interface Job {
 
     void rollback();
 
-
+    JobResult getJobResult();
 }

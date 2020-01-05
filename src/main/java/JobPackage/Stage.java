@@ -1,4 +1,4 @@
 package JobPackage;
 
-public class JobBase {
+public class Stage {
 }
