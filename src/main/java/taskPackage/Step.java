@@ -8,6 +8,10 @@ import lombok.Setter;
 public class Step {
     String stepName;
 
+    String actionTarget;
+
+    String actionMethod;
+
     boolean canRetry;
 
     boolean canRollback;
