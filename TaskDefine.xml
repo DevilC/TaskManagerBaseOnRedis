@@ -1,0 +1,8 @@
+<tasks>
+    <task>
+        <taskName>test</taskName>
+        <classList>
+            <classPath>taskPackage.Step</classPath>
+        </classList>
+    </task>
+</tasks>
