@@ -20,17 +20,9 @@ public @interface StepTag {
     String rollbackStepName() default "";
 
     /**
-     * 所在阶段名称
-     * @return
+     * 步骤顺序
      */
-    String sectionName();
-
-    /**
-     * 所在阶段类型，为INIT、EXECUTE、FINALLY
-     * @return
-     */
-    SectionType stageType();
-
+    int order();
     /**
      * 是否失败断点重试
      * @return

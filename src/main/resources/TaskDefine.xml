@@ -1,6 +1,8 @@
 <tasks>
     <task>
         <taskName>testClass</taskName>
-        <classPath></classPath>
+        <classes>
+            <classPath></classPath>>
+        </classes>
     </task>
 </tasks>

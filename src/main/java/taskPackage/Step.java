@@ -19,4 +19,11 @@ public class Step {
     boolean autoRollback;
 
     Step rollbackStep;
+
+    @Override
+    public String toString(){
+        return "{stepName: " + stepName + " ;actionTarget: " + actionTarget + "; actionMethod: "
+                + actionMethod + "; canRetry: "+ canRetry + "; canRollback: " + canRollback +
+                "; autoRollback: " + autoRollback + "; rollbackStep: " + rollbackStep + "}";
+    }
 }

@@ -17,4 +17,9 @@ public class Section {
      * 步骤列表
      */
     List<Step> steps;
+
+    @Override
+    public String toString(){
+        return "{sectionName: " + this.sectionName + "; steps: " + this.steps + "}";
+    }
 }
