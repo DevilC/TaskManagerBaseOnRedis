@@ -1,15 +1,14 @@
 package taskPackage;
 
-import JobPackage.Job;
+import com.sun.istack.internal.NotNull;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
-import sun.reflect.Reflection;
+import taskLoadExceptionPackage.TaskDefineTagWrongException;
+import taskLoadExceptionPackage.TaskNotFoundException;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +27,13 @@ public class TaskFactory {
     private HashMap<String, ArrayList<Class>> taskNameClassMap = new HashMap<String, ArrayList<Class>>();
 
     TaskFactory() {
+        loadTaskDefine();
+    }
+
+    /**
+     * 加载TaskDefine.xml文件
+     */
+    public void loadTaskDefine(){
         File file = new File(TaskFactory.class.getResource("TaskDefine.xml").getPath());
         try(InputStream is = new FileInputStream(file)){
             SAXBuilder saxBuilder = new SAXBuilder();
@@ -37,22 +43,25 @@ public class TaskFactory {
             for(Element task: tasks){
                 List<Element> items = task.getChildren();
                 String taskName = "";
-                List<Class> classList = new ArrayList<Class>(items.size() - 1);
+                List<Class> classList = new ArrayList<Class>();
                 for(Element item: items){
                     if(item.getName().equals(TASKNAME_TAG)){
                         taskName = item.getValue();
+                        System.out.println("load task: " + taskName);
                     } else if(item.getName().equals(CLASSLIST_TAG)){
                         List<Element> classes = item.getChildren();
                         for(Element classPath: classes){
-                            classList.add(Class.forName(classPath.getValue()));
+                            if(classPath.getName().equals(CLASSPATH_TAG)) {
+                                classList.add(Class.forName(classPath.getValue()));
+                            }
                         }
                     } else{
-                        throw new TaskDefineTagWrongException("TaskDefine tag wrong!");
+                        throw new TaskDefineTagWrongException(item.getName());
                     }
                 }
             }
         } catch (IOException e){
-
+            e.printStackTrace();
         } catch (JDOMException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -61,6 +70,7 @@ public class TaskFactory {
             e.printStackTrace();
         }
     }
+
     /**
      * 获取Task Factory实例
      * @return TaskFactory实例
@@ -69,8 +79,23 @@ public class TaskFactory {
         return instance;
     }
 
-    public Task getTaskByName(String taskName){
-        return new Task();
+    /**
+     * 通过taskName获取task
+     * @param taskName
+     * @return Task对象
+     */
+    public Task getTaskByName(String taskName) throws TaskNotFoundException {
+        if(!this.taskNameClassMap.containsKey(taskName)){
+            throw new TaskNotFoundException("Task not found, taskName: " + taskName);
+        } else{
+            Task task = extractTaskByAnotationFromClass(this.taskNameClassMap.get(taskName));
+            return task;
+        }
+    }
+
+    @NotNull
+    private Task extractTaskByAnotationFromClass(List<Class> classList){
+        return null;
     }
 
 }

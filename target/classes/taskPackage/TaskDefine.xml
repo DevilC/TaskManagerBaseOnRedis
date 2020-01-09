@@ -2,7 +2,7 @@
     <task>
         <taskName>test</taskName>
         <classList>
-            <classPath>taskPackage.Step</classPath>
+            <classPath>TestTask</classPath>
         </classList>
     </task>
 </tasks>
