@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="TaskDefineSchema"
+           xmlns="TaskDefineSchema"
+           elementFormDefault="qualified">
+
+
+    <xs:element name="tasks">
+        <xs:complexType>
+            <xs:sequence maxOccurs="unbounded">
+                <xs:element name="task">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="classList">
+                                <xs:complexType>
+                                    <xs:sequence maxOccurs="unbounded">
+                                        <xs:element name="classPath">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:minLength value="1"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="taskName" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:minLength value="1"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
+
+                        <xs:attribute name="businessType" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string" >
+                                    <xs:minLength value="1"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
+
+                        <xs:attribute name="level" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:positiveInteger"/>
+                            </xs:simpleType>
+                        </xs:attribute>
+
+                        <xs:attribute name="exclusiveType" type="xs:string"/>
+                        <xs:attribute name="canInterrupt" type="xs:boolean"/>
+                        <xs:attribute name="timeout" type="xs:integer"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

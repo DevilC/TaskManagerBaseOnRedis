@@ -1,6 +1,19 @@
+
+<!--
 <tasks>
-    <task>
-        <taskName>test</taskName>
+    <task taskName="必填" businessType="必填" level="必填，最高优先级为0" exclusiveType="可选；取值范围Global、Bussiness、Task；若存在即有互斥" canInterrupt="可选；True、False,默认False" timeout="可选，若不填则取默认超时时间,单位s">
+        <classList>
+            <classPath>TestTask</classPath>
+        </classList>
+    </task>
+</tasks>-->
+<tasks xmlns="TaskDefineSchema">
+    <task taskName="testTask1" businessType="test1" level="0">
+        <classList>
+            <classPath>TestTask</classPath>
+        </classList>
+    </task>
+    <task taskName="testTask2" businessType="test2" level="0" exclusiveType="Global" canInterrupt="True" timeout="1000">
         <classList>
             <classPath>TestTask</classPath>
         </classList>
