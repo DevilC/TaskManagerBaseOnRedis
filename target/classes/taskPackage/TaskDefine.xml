@@ -8,12 +8,12 @@
     </task>
 </tasks>-->
 <tasks xmlns="TaskDefineSchema">
-    <task taskName="testTask1" businessType="test1" level="0">
+    <task taskName="testTask1" businessType="test1" level="1">
         <classList>
             <classPath>TestTask</classPath>
         </classList>
     </task>
-    <task taskName="testTask2" businessType="test2" level="0" exclusiveType="Global" canInterrupt="True" timeout="1000">
+    <task taskName="testTask2" businessType="test2" level="1" exclusiveType="Global" canInterrupt="true" timeout="1000">
         <classList>
             <classPath>TestTask</classPath>
         </classList>
