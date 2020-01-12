@@ -86,7 +86,7 @@ public class TaskFactory {
      */
     public Task getTaskByName(String taskName) throws TaskNotFoundException {
         if(!this.taskNameClassMap.containsKey(taskName)){
-            throw new TaskNotFoundException("Task not found, taskName: " + taskName);
+            throw new TaskNotFoundException(taskName);
         } else{
             Task task = extractTaskByAnotationFromClass(this.taskNameClassMap.get(taskName));
             return task;
