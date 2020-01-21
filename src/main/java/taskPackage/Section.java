@@ -9,14 +9,15 @@ import java.util.List;
 @Getter
 @Setter
 public class Section {
-    public Section(String sectionName, SectionType sectionType) {
-        this(sectionName, new ArrayList<Step>(), sectionType);
+    public Section(String sectionName, SectionType sectionType, int order) {
+        this(sectionName, new ArrayList<Step>(), sectionType, order);
     }
 
-    public Section(String sectionName, List<Step> steps, SectionType sectionType) {
+    public Section(String sectionName, List<Step> steps, SectionType sectionType, int order) {
         this.sectionName = sectionName;
         this.steps = steps;
         this.sectionType = sectionType;
+        this.order = order;
     }
 
     /**
@@ -33,6 +34,11 @@ public class Section {
      * 步骤列表
      */
     List<Step> steps;
+
+    /**
+     * 执行顺序
+     */
+    int order;
 
     @Override
     public String toString(){

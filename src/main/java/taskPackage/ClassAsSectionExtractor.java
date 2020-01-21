@@ -5,12 +5,12 @@ import taskLoadExceptionPackage.SectionDefineDuplicateException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-public class ClassAsStageExtractor extends SectionExtractor {
+public class ClassAsSectionExtractor extends SectionExtractor {
     Section globalSection;
-    public ClassAsStageExtractor(Class targetClass){
+    public ClassAsSectionExtractor(Class targetClass){
         super(targetClass);
         SectionTag tag = (SectionTag) targetClass.getAnnotation(SectionTag.class);
-        globalSection = new Section(tag.sectionName(), tag.sectionType());
+        globalSection = new Section(tag.sectionName(), tag.sectionType(), tag.order());
     }
 
     @Override
@@ -19,8 +19,10 @@ public class ClassAsStageExtractor extends SectionExtractor {
         for(Method method: methods){
             Annotation[] annotations = method.getAnnotations();
             checkSectionDefineDuplicate(annotations);
-
         }
+        ClassAsSectionStepExtractor stepExtrator = new ClassAsSectionStepExtractor(targetClass);
+        globalSection.setSteps(stepExtrator.doExtract());
+        return globalSection;
     }
 
     /**

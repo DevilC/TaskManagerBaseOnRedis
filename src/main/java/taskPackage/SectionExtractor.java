@@ -2,6 +2,8 @@ package taskPackage;
 
 import taskLoadExceptionPackage.SectionDefineDuplicateException;
 
+import java.lang.annotation.Annotation;
+
 public abstract class SectionExtractor {
     Class targetClass;
 
