@@ -4,6 +4,8 @@ import taskLoadExceptionPackage.SectionDefineDuplicateException;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClassAsSectionExtractor extends SectionExtractor {
     Section globalSection;
@@ -14,7 +16,7 @@ public class ClassAsSectionExtractor extends SectionExtractor {
     }
 
     @Override
-    public Section doExtract() throws SectionDefineDuplicateException {
+    public List<Section> doExtract() throws SectionDefineDuplicateException {
         Method[] methods = targetClass.getMethods();
         for(Method method: methods){
             Annotation[] annotations = method.getAnnotations();
@@ -22,7 +24,9 @@ public class ClassAsSectionExtractor extends SectionExtractor {
         }
         ClassAsSectionStepExtractor stepExtrator = new ClassAsSectionStepExtractor(targetClass);
         globalSection.setSteps(stepExtrator.doExtract());
-        return globalSection;
+        List<Section> sectionList = new ArrayList<>(1);
+        sectionList.add(globalSection);
+        return sectionList;
     }
 
     /**

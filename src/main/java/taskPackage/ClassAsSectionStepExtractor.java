@@ -22,7 +22,7 @@ public class ClassAsSectionStepExtractor {
             for(Annotation annotation: annotations){
                 if(StepTag.class.equals(annotation.annotationType())){
                     StepTag tag = (StepTag) annotation;
-                    stepList.add(new Step(tag.stepName(), targetClass, method, tag.canRetry(), tag.canRollback(), tag.order()));
+                    stepList.add(new Step(tag, targetClass, method));
                 }
             }
         }

@@ -26,17 +26,17 @@ public class Step {
 
     int order;
 
-    Step(String stepName, Class actionTarget, Method actionMethon, boolean canRetry, boolean canRollback, int order) {
-        this.stepName = stepName;
-        this.actionMethod = actionMethon;
-        this.actionTarget = actionTarget;
-        this.canRetry = canRetry;
-        this.canRollback = canRollback;
-        this.order = order;
+    Step(StepTag stepTag, Class actionTarget, Method actionMethod) {
+        this(stepTag.stepName(), actionTarget, actionMethod, stepTag.canRetry(), stepTag.canRollback(), stepTag.order(), stepTag.rollbackStepName());
     }
 
     Step(String stepName, Class actionTarget, Method actionMethon, boolean canRetry, boolean canRollback, int order, String rollbackStepName) {
-        this(stepName, actionTarget, actionMethon, canRetry, canRollback, order);
+        this.stepName = stepName;
+        this.actionTarget = actionTarget;
+        this.actionMethod = actionMethon;
+        this.canRetry = canRetry;
+        this.canRollback = canRollback;
+        this.order = order;
         this.rollbackStepName = rollbackStepName;
     }
 
@@ -45,5 +45,16 @@ public class Step {
         return "{stepName: " + stepName + " ;actionTarget: " + actionTarget + "; actionMethod: "
                 + actionMethod + "; canRetry: "+ canRetry + "; canRollback: " + canRollback +
                 "; autoRollback: " + autoRollback + "; rollbackStep: " + rollbackStep + "}";
+    }
+
+    public boolean equals(Object obj){
+        if(!(obj instanceof Step)){
+            return false;
+        }
+        Step stepObj = (Step) obj;
+        if(stepObj.stepName.equals(this.stepName)){
+            return true;
+        }
+        return false;
     }
 }

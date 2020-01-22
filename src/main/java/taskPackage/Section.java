@@ -44,4 +44,16 @@ public class Section {
     public String toString(){
         return "{sectionName: " + this.sectionName + "; steps: " + this.steps + "}";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Section)){
+            return false;
+        }
+        Section sectionObj = (Section) obj;
+        if (sectionObj.getSectionName().equals(this.sectionName)) {
+            return true;
+        }
+        return false;
+    }
 }
