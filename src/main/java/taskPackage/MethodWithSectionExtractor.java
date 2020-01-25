@@ -50,7 +50,7 @@ public class MethodWithSectionExtractor extends SectionExtractor {
     }
 
     /**
-     * 检查step指定的rollbackStep是否由定义
+     * 检查step指定的rollbackStep是否由定义,rollbackStep与step必须在同一个class中
      * @param sectionList targetClass的所有section
      * @throws AnnotationRepeatDefineException 注解定义重复异常
      * @throws RollbackStepNotFoundException 没找到回退step异常
@@ -61,7 +61,7 @@ public class MethodWithSectionExtractor extends SectionExtractor {
             List<Step> stepList = section.getSteps();
             for(Step step: stepList) {
                 if(step.rollbackStepName != null && step.rollbackStepName != ""){
-                    step.canRollback = true;
+                    step.setCanRollback(true);
                     boolean isFound = false;
                     for (Method method : methods) {
                         StepTag methodStepTag = checkAnnotationRepeatOnMethodAndGet(StepTag.class, method);
