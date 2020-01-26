@@ -13,5 +13,15 @@ public enum ExclusiveType {
         this.value = value;
     }
 
+    public static ExclusiveType getExclusiveType(String type){
+        if("Global".equals(type)){
+            return Global;
+        } else if("Business".equals(type)){
+            return Business;
+        } else{
+            return Task;
+        }
+    }
+
     int value;
 }

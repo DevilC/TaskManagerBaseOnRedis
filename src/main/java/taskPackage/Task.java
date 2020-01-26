@@ -21,7 +21,7 @@ public class Task {
     /**
      * 是否任务互斥
      */
-    boolean exclusive;
+    boolean exclusive = false;
 
     /**
      * 互斥类型，当exclusive为true时生效
@@ -36,7 +36,7 @@ public class Task {
     /**
      * 执行过程是否可中断
      */
-    boolean canInterrupt;
+    boolean canInterrupt = false;
 
     /**
      * 初始化阶段Section列表
